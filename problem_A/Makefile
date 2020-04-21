@@ -83,7 +83,7 @@ CFLAGS += $(INCLUDES) $(CWARNS) -O2
 
 # Rules
 .PHONY : all
-all: setup FreeRTOS-Sim-Program
+all: setup race
 
 .PHONY : setup
 setup:
@@ -103,7 +103,7 @@ else
 	@$(CC) $(CFLAGS) -c -o $@ $<
 endif
 
-FreeRTOS-Sim-Program: $(_OBJS)
+race: $(_OBJS)
 	@echo ">> Linking $@..."
 ifeq ($(verbose),1)
 	$(CC) $(CFLAGS) $^ $(LINKFLAGS) $(LIBS) -o $@
@@ -117,7 +117,7 @@ endif
 
 .PHONY : clean
 clean:
-	@-rm -rf $(ODIR) FreeRTOS-Sim-Program
+	@-rm -rf $(ODIR) race
 	@echo "--------------"
 	@echo "CLEAN COMPLETE"
 	@echo "--------------"
